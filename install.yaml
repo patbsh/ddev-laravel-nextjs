@@ -1,6 +1,32 @@
 name: laravel-nextjs
 
 project_files:
-  - docker-compose.laravel-nextjs.yaml
+  - nginx_full/nginx-site.conf
+  - commands/host/laravel-nextjs-setup
+  - commands/web/artisan
+  - commands/web/npm-frontend
+  - templates/.env.nextjs.example
+  - web-entrypoint.d/nextjs-start.sh
 
-ddev_version_constraint: '>= v1.24.3'
+ddev_version_constraint: '>= v1.24.0'
+
+post_install_actions:
+  - |
+    #ddev-description:Set up additional hostname for API
+    ddev config --additional-hostnames=api.${DDEV_SITENAME}
+  - |
+    #ddev-description:Display setup instructions
+    echo ""
+    echo "🚀 Laravel + Next.js DDEV add-on installed successfully!"
+    echo ""
+    echo "To complete the setup, run:"
+    echo "  ddev start"
+    echo "  ddev laravel-nextjs-setup"
+    echo ""
+    echo "This will create both Laravel backend and Next.js frontend projects."
+    echo ""
+
+removal_actions:
+  - |
+    #ddev-description:Remove Laravel + Next.js configuration
+    echo "Laravel + Next.js addon removed. Backend and frontend directories preserved."

@@ -1,48 +1,52 @@
-[![add-on registry](https://img.shields.io/badge/DDEV-Add--on_Registry-blue)](https://addons.ddev.com)
-[![tests](https://github.com/patbsh/ddev-laravel-nextjs/actions/workflows/tests.yml/badge.svg?branch=main)](https://github.com/patbsh/ddev-laravel-nextjs/actions/workflows/tests.yml?query=branch%3Amain)
-[![last commit](https://img.shields.io/github/last-commit/patbsh/ddev-laravel-nextjs)](https://github.com/patbsh/ddev-laravel-nextjs/commits)
-[![release](https://img.shields.io/github/v/release/patbsh/ddev-laravel-nextjs)](https://github.com/patbsh/ddev-laravel-nextjs/releases/latest)
+# DDEV Laravel + Next.js Addon
 
-# DDEV Laravel Nextjs
+A DDEV addon that sets up a Laravel backend with Next.js frontend in separate containers.
 
-## Overview
+## What it does
 
-This add-on integrates Laravel Nextjs into your [DDEV](https://ddev.com/) project.
+- Creates a fresh Laravel project in `/backend` directory
+- Creates a fresh Next.js project in `/frontend` directory  
+- Configures environment files for both
+- Sets up proper routing:
+  - Frontend: `https://projectname.ddev.site`
+  - Backend API: `https://api.projectname.ddev.site`
 
 ## Installation
 
 ```bash
-ddev add-on get patbsh/ddev-laravel-nextjs
-ddev restart
+ddev get /path/to/this/addon
 ```
-
-After installation, make sure to commit the `.ddev` directory to version control.
 
 ## Usage
 
-| Command | Description |
-| ------- | ----------- |
-| `ddev describe` | View service status and used ports for Laravel Nextjs |
-| `ddev logs -s laravel-nextjs` | Check Laravel Nextjs logs |
-
-## Advanced Customization
-
-To change the Docker image:
+After installation, bootstrap your project:
 
 ```bash
-ddev dotenv set .ddev/.env.laravel-nextjs --laravel-nextjs-docker-image="busybox:stable"
-ddev add-on get patbsh/ddev-laravel-nextjs
-ddev restart
+ddev laravel-nextjs-setup
 ```
 
-Make sure to commit the `.ddev/.env.laravel-nextjs` file to version control.
+## Available Commands
 
-All customization options (use with caution):
+- `ddev artisan` - Run Laravel artisan commands
+- `ddev npm-frontend` - Run npm commands in frontend directory
+- `ddev laravel-nextjs-setup [--force]` - Bootstrap the project (use --force to overwrite existing)
 
-| Variable | Flag | Default |
-| -------- | ---- | ------- |
-| `LARAVEL_NEXTJS_DOCKER_IMAGE` | `--laravel-nextjs-docker-image` | `busybox:stable` |
+## Project Structure
 
-## Credits
+```
+project/
+├── backend/          # Laravel application
+├── frontend/         # Next.js application
+└── .ddev/           # DDEV configuration
+```
 
-**Contributed and maintained by [@patbsh](https://github.com/patbsh)**
+## Next Steps
+
+1. Run `ddev artisan migrate` to set up your database
+2. Start building your application!
+
+## URLs
+
+- Frontend: `https://projectname.ddev.site`
+- Backend: `https://api.projectname.ddev.site`
+- Database: Available to both containers as `db` host
