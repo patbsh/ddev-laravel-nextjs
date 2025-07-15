@@ -36,7 +36,7 @@ ddev get /path/to/this/addon
 After installation, bootstrap your project:
 
 ```bash
-ddev laravel-nextjs-setup
+ddev start && ddev laravel-nextjs-setup
 ```
 
 ## Available Commands
