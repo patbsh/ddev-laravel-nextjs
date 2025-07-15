@@ -13,6 +13,20 @@ A DDEV addon that sets up a Laravel backend with Next.js frontend in separate co
 
 ## Installation
 
+In a new directory, initialize ddev
+
+```bash
+ddev config --project-type=php
+```
+
+then get the addon from the addon registry
+
+```bash
+ddev get ddev/ddev-laravel-nextjs
+```
+
+or from a local location
+
 ```bash
 ddev get /path/to/this/addon
 ```
