@@ -33,17 +33,12 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v4
-        with:
-          submodules: true
-
+      - name: Action Setup Bash
+        uses: release-engineers/action-setup-bash@v1
       - uses: ddev/github-action-add-on-test@v2
         with:
-          disable_checkout_action: true
           ddev_version: ${{ matrix.ddev_version }}
           token: ${{ secrets.GITHUB_TOKEN }}
           debug_enabled: ${{ github.event.inputs.debug_enabled }}
           addon_repository: ${{ env.GITHUB_REPOSITORY }}
           addon_ref: ${{ env.GITHUB_REF }}
-          test_command: eval TEST_DRUPAL_CORE=${{ matrix.drupal_version }} ./tests/bats/bin/bats tests
-
